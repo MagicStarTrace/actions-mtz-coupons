@@ -13,7 +13,7 @@
 </p>
 <br/>
 
-# 🧧 外卖神券天天领
+# 🧧 外卖神券天天领 Ver.2
 
 <p>外卖神券天天领，超值红包享不停；以自动化的方式领取外卖红包。</p><br/>
 
@@ -25,7 +25,7 @@
 
 ### 环境要求
 
-- [Node.js](https://nodejs.org/) v18.0 及以上
+- [Node.js](https://nodejs.org/) v20.0 及以上
 - [pnpm](https://pnpm.io/) v8.0 及以上
 
 ### 获取账号 Token
@@ -80,7 +80,7 @@ Github Actions 工作流支持**手动**与**自动**两种触发方式。
 
 ## 🤹‍♂️ 进阶用法
 
-- [使用 JSON Token](./token配置.md)
+- [使用 JSON Token](./docs/token配置.md)
 - [添加消息通知](./docs/通知.md)
 - [使用多账户配置](./docs/token配置.md)
 - [脚本更新](./docs/更新.md)

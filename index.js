@@ -6,7 +6,7 @@ import pLimit from 'p-limit'
 import Notifier from './src/notifier/index.js'
 import { parseToken } from './src/user.js'
 import updateNotifier from './src/update-notifier.js'
-import { getCoupons } from './src/coupons/index.js'
+import { grabCoupons } from './src/coupons/index.js'
 import { readPkgJson } from './src/util/index.js'
 
 const { version: currentVersion } = readPkgJson()
@@ -18,6 +18,10 @@ const notifier = new Notifier({
   workWechat: process.env.QYWX_SEND_CONF,
   serverChanToken: process.env.SC_SEND_KEY,
   pushplusToken: process.env.PUSHPLUS_TOKEN,
+  wxpusher: {
+    token: process.env.WXPUSHER_TOKEN,
+    topicId: process.env.WXPUSHER_TOPICID
+  },
   dingTalkWebhook: process.env.DINGTALK_WEBHOOK,
   telegram: {
     botToken: process.env.TG_BOT_TOKEN,
@@ -138,7 +142,7 @@ function parseAccountName(account, userInfo = {}) {
 }
 
 async function doJob(account, progress) {
-  const res = await getCoupons(account.token, { maxRetry: MAX_RETRY_COUNT })
+  const res = await grabCoupons(account.token, { maxRetry: MAX_RETRY_COUNT })
   const accountName = parseAccountName(account)
 
   console.log(
@@ -224,7 +228,6 @@ async function main() {
 
   const globalPushQueue = sendGlobalNotify(tasks)
   const userPushQueue = tasks.map((res) => res.pushQueue).flat()
-
   // 打印通知结果，用户通知优先
   await printNotifyResult(userPushQueue.concat(globalPushQueue))
 
